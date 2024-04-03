@@ -36,6 +36,8 @@ namespace D_DTesting.Domain.UnitTests.EquippableAction
             Assert.AreEqual(_armor.ArmorValue, _pc.Armor);
         }
 
+        //TODO: Figure out why this is still set to true when running all tests
+        //but then succeeds when running it as a single test.
         [Test]
         public void ArmorUnEquipShouldRemoveStealthDisadvantage()
         {
@@ -43,7 +45,9 @@ namespace D_DTesting.Domain.UnitTests.EquippableAction
             _pc.SetSkills();
             _pc.StoreItemInInventory(_armor);
             _pc.EquipGear(_armor);
+            Thread.Sleep(2000);
             _pc.UnEquipGear(_armor);
+            Thread.Sleep(2000);
             Assert.IsFalse(_pc.Skills.First(a => a.Name == "Stealth").Disadvantage);
         }
 

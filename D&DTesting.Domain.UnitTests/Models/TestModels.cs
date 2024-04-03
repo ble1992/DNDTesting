@@ -75,6 +75,7 @@ namespace D_DTesting.Domain.UnitTests.Models
                 }
             }
         };
+
         public static Weapon TestWeapon = new Weapon()
         {
             Name = "Light Dagger",
@@ -90,5 +91,7 @@ namespace D_DTesting.Domain.UnitTests.Models
                     Disadvantage = true } 
             },
         };
+
+        public static GameMap TestGameMap = new GameMap(30, 30);
     }
 }
