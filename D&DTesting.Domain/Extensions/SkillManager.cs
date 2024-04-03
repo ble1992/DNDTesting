@@ -41,24 +41,58 @@ namespace D_DTesting.Domain.Extensions
             }
         }
 
+        public static void UnSetSkillsFromItems(this PlayableCharacter pc, IEquipable item)
+        {
+            if (item.Properties.Any(p => p.Type is ISkill))
+            {
+                item.Properties.ForEach(p =>
+                {
+                    var skill = pc.Skills.FirstOrDefault(s => s.Name == p.Name);
+                    skill.ItemModifier -= p.Modifier;
+
+                    if (Enum.IsDefined(typeof(ProficiencyBonusType), (int)skill.ProficiencyBonus - p.Proficiency))
+                        skill.ProficiencyBonus = (ProficiencyBonusType)((int)skill.ProficiencyBonus - p.Proficiency);
+
+                    if (!pc.Equipments.Any(i => ItemHasSameProperties(item, i)))
+                    {
+                        if (p.Advantage)
+                            skill.Advantage = !skill.Advantage;
+
+                        if (p.Disadvantage)
+                            skill.Disadvantage = !skill.Disadvantage;
+                    }
+                });
+            }
+        }
+
         public static void SetSkillFromItems(this PlayableCharacter pc, IEquipable item)
         {
             if(item.Properties.Any(p => p.Type is ISkill))
             {
-                var skillProperty = item.Properties.FirstOrDefault(p => p.Type is ISkill);
-                var skill = pc.Skills.FirstOrDefault(s => s.Name == skillProperty.Name);
+                item.Properties.ForEach(p =>
+                {
+                    var skill = pc.Skills.FirstOrDefault(s => s.Name == p.Name);
 
-                skill.ItemModifier += skillProperty.Modifier;
+                    skill.ItemModifier += p.Modifier;
 
-                if(Enum.IsDefined(typeof(ProficiencyBonusType), (int)skill.ProficiencyBonus + skillProperty.Proficiency))
-                    skill.ProficiencyBonus = (ProficiencyBonusType)((int)skill.ProficiencyBonus + skillProperty.Proficiency);
+                    if (Enum.IsDefined(typeof(ProficiencyBonusType), (int)skill.ProficiencyBonus + p.Proficiency))
+                        skill.ProficiencyBonus = (ProficiencyBonusType)((int)skill.ProficiencyBonus + p.Proficiency);
 
-                if (skillProperty.Advantage)
-                    skill.Advantage = skillProperty.Advantage;
+                    if (p.Advantage)
+                        skill.Advantage = p.Advantage;
 
-                if (skillProperty.Disadvantage)
-                    skill.Disadvantage = skillProperty.Disadvantage;
+                    if (p.Disadvantage)
+                        skill.Disadvantage = p.Disadvantage;
+                });
             }
+        }
+
+        private static bool ItemHasSameProperties(this IEquipable item, IEquipable otherItem)
+        {
+            return item.Properties.All(p => 
+            otherItem.Properties.Any(op => op.Name == p.Name 
+            && op.Advantage == p.Advantage 
+            && op.Disadvantage == p.Disadvantage));
         }
     }
 }

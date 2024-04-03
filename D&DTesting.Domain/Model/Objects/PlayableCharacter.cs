@@ -22,7 +22,13 @@ namespace D_DTesting.Domain.Model.Objects
         public int Level { get; set; } = 1;
         public int CurrentHealth { get; set; }
         public int MaxHealth { get; set; }
-        public int Armor { get; set; }
+        public int Armor { 
+            get 
+            {
+                var armorEquipment = Equipments.Where(x => x.GetType() == typeof(Armor)).Cast<Armor>().ToList();
+                return armorEquipment.Sum(x => x.ArmorValue);
+            } 
+        }
         public int ProficiencyBonus {
             get
             {

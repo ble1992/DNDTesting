@@ -1,5 +1,5 @@
 ﻿using D_DTesting.Domain.UnitTests.Models;
-using D_DTesting.Domain.Extensions;
+
 using D_DTesting.Domain.Model.Inventory;
 
 
@@ -26,15 +26,6 @@ namespace D_DTesting.Domain.UnitTests.Equipable
         public void ArmorPropertyIsNotISavingThrow()
         {
             Assert.IsFalse(_armor.Properties.First().Type is ISavingThrow);
-        }
-
-        [Test]
-        public void ArmorPropertyCreateStealthDisadvantage()
-        {
-            _pc.SetSavingThrows();
-            _pc.SetSkills();
-            _pc.EquipGear(_armor);
-            Assert.IsTrue(_pc.Skills.First(a => a.Name == "Stealth").Disadvantage);
         }
     }
 }

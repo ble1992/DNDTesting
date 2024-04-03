@@ -33,7 +33,7 @@ namespace D_DTesting.Domain.UnitTests.Models
             Size = Size.Medium,
             Bag = new Bag()
             {
-                Items = new List<IItem>() { TestArmor }
+                Items = new List<IItem>()
             },
             Abilities = new List<IAbilitiyScore>()
             {
@@ -86,6 +86,21 @@ namespace D_DTesting.Domain.UnitTests.Models
                     Disadvantage = false
                 }
             }
+        };
+        public static Weapon TestWeapon = new Weapon()
+        {
+            Name = "Light Dagger",
+            Properties = new List<Property>() { 
+                new Property() 
+                { 
+                    Name = "Stealth", 
+                    Description = "You can use your Dexterity modifier instead of " +
+                    "Strength for the attack and damage rolls of melee attacks with this weapon.", 
+                    Type = new Skill(), 
+                    Modifier = 0, 
+                    Advantage = false, 
+                    Disadvantage = true } 
+            },
         };
     }
 }

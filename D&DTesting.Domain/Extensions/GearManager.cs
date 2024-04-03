@@ -31,13 +31,14 @@ namespace D_DTesting.Domain.Extensions
             {
                 UnequipWeapon(player, weapon);
             }
+            player.UnSetSkillsFromItems(gear);
         }
-        public static void StoreItem(this PlayableCharacter player, IItem item)
+        public static void StoreItemInInventory(this PlayableCharacter player, IItem item)
         {
             player.Bag.Items.Add(item);
             player.Bag.CurrentWeight += item.Weight;
         }
-        public static void RemoveItem(this PlayableCharacter player, IItem item)
+        public static void RemoveItemFromInventory(this PlayableCharacter player, IItem item)
         {
             player.Bag.Items.Remove(item);
             player.Bag.CurrentWeight -= item.Weight;
@@ -48,31 +49,28 @@ namespace D_DTesting.Domain.Extensions
             var existingArmor = player.Equipments.FirstOrDefault(e => e is Armor);
             if (existingArmor != null)
             {
-                player.Armor -= ((Armor)existingArmor).ArmorValue;
-                player.StoreItem((IItem)existingArmor);
+                player.StoreItemInInventory((IItem)existingArmor);
                 player.Equipments.Remove(existingArmor);
             }
             player.Equipments.Add(armor);
-            player.Armor += armor.ArmorValue;
-            player.RemoveItem(armor);
+            player.RemoveItemFromInventory(armor);
         }
         private static void UnEquipArmor(PlayableCharacter player, Armor armor)
         {
-            player.Armor -= armor.ArmorValue;
             player.Equipments.Remove(armor);
-            player.StoreItem(armor);
+            player.StoreItemInInventory(armor);
         }
         private static void EquipWeapon(PlayableCharacter player, Weapon weapon)
         {
             player.Equipments.Add(weapon);
             player.ActionSets.Add(weapon);
-            player.RemoveItem(weapon);
+            player.RemoveItemFromInventory(weapon);
         }
         private static void UnequipWeapon(PlayableCharacter player, Weapon weapon)
         {
             player.Equipments.Remove(weapon);
             player.ActionSets.Remove(weapon);
-            player.StoreItem(weapon);
+            player.StoreItemInInventory(weapon);
         }
     }
 }
