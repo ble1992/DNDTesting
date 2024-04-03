@@ -1,4 +1,4 @@
-﻿using D_DTesting.Domain.Model.Action;
+﻿using D_DTesting.Domain.Abstractions;
 using D_DTesting.Domain.Model.Misc;
 using D_DTesting.Domain.Model.Objects;
 
@@ -6,56 +6,52 @@ namespace D_DTesting.Domain.Extensions
 {
     public static class AbilitiyManager
     {
-        private static readonly Dictionary<string, string> _skillKeyAbilityValue = new Dictionary<string, string>()
-        {
-            { "Acrobatics", "Dexterity" },
-            { "Animal Handling", "Wisdom" },
-            { "Arcana", "Intelligence" },
-            { "Athletics", "Strength" },
-            { "Deception", "Charisma" },
-            { "History", "Intelligence" },
-            { "Insight", "Wisdom" },
-            { "Intimidation", "Charisma" },
-            { "Investigation", "Intelligence" },
-            { "Medicine", "Wisdom" },
-            { "Nature", "Intelligence" },
-            { "Perception", "Wisdom" },
-            { "Performance", "Charisma" },
-            { "Persuasion", "Charisma" },
-            { "Religion", "Intelligence" },
-            { "Sleight of Hand", "Dexterity" },
-            { "Stealth", "Dexterity" },
-            { "Survival", "Wisdom" }
-        };
         public static void SetSavingThrows(this PlayableCharacter pc)
         {
             var AbilityScores = pc.Abilities;
 
             foreach(var ability in AbilityScores)
             {
-                var modifier = CalculateModifier(ability.Score);
-                pc.SavingThrow.Add(new SavingThrow
+                var modifier = CommonExtensions.CalculateModifier(ability.Score);
+                pc.SavingThrows.Add(new SavingThrow
                 {
                     Name = ability.Name,
-                    DC = modifier
+                    AbilitiyModifier = modifier
                 });
             }
         }
 
-        public static int CalculateModifier(int score)
+        public static void SetAbilityScoreFromItems(this PlayableCharacter pc, IEquipable item)
         {
-            return (score - 10) / 2;
+            if (item.Properties.Any(p => p.Type is IAbilitiyScore))
+            {
+                var skillProperty = item.Properties.FirstOrDefault(p => p.Type is IAbilitiyScore);
+                var skill = pc.Abilities.FirstOrDefault(s => s.Name == skillProperty.Name);
+
+                skill.ItemScore += skillProperty.Modifier;
+
+                if (skillProperty.Advantage)
+                    skill.Advantage = skillProperty.Advantage;
+
+                if (skillProperty.Disadvantage)
+                    skill.Disadvantage = skillProperty.Disadvantage;
+            }
         }
 
-        public static void SetSkills(this PlayableCharacter pc)
+        public static void SetSavingThrowFromItems(this PlayableCharacter pc, IEquipable item)
         {
-            foreach(KeyValuePair<string,string> kvp in _skillKeyAbilityValue)
+            if (item.Properties.Any(p => p.Type is ISavingThrow))
             {
-                pc.Skills.Add(new Skill()
-                {
-                    Name = kvp.Key,
-                    ModifierBonus = CalculateModifier(pc.Abilities.Find(x => x.Name == kvp.Value).Score),
-                });
+                var skillProperty = item.Properties.FirstOrDefault(p => p.Type is ISavingThrow);
+                var skill = pc.SavingThrows.FirstOrDefault(s => s.Name == skillProperty.Name);
+
+                skill.ItemModifier += skillProperty.Modifier;
+
+                if (skillProperty.Advantage)
+                    skill.Advantage = skillProperty.Advantage;
+
+                if (skillProperty.Disadvantage)
+                    skill.Disadvantage = skillProperty.Disadvantage;
             }
         }
     }

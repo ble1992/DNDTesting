@@ -15,6 +15,7 @@ namespace D_DTesting.Domain.Model.Inventory
         public int Modifier { get; set; }
         public DamageType DamageType { get; set; }
 
+        public List<Property> Properties { get; set; } = new List<Property>();
         public void Use(IInteractableObject target)
         {
             throw new NotImplementedException();

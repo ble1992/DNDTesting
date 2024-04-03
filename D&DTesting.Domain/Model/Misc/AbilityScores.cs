@@ -7,11 +7,13 @@ namespace D_DTesting.Domain.Model.Misc
     {
         public string Name { get; set; }
         public int Score { get; set; }
-        public int Modifier { 
+        public int TotalScore { get { return Score + ItemScore; } }
+        public int AbilityModifier { 
             get {
-                return AbilitiyManager.CalculateModifier(Score);
+                return CommonExtensions.CalculateModifier(TotalScore);
             } 
         }
+        public int ItemScore { get; set; }
         public Dice Dice { get; set; } = new Dice() { DieAmount = 1, DiceSize = 20 };
         public bool Advantage { get; set; }
         public bool Disadvantage { get; set; }

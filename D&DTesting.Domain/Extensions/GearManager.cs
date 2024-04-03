@@ -16,6 +16,10 @@ namespace D_DTesting.Domain.Extensions
             {
                 EquipWeapon(player, weapon);
             }
+
+            player.SetAbilityScoreFromItems(gear);
+            player.SetSavingThrowFromItems(gear);
+            player.SetSkillFromItems(gear);
         }
         public static void UnEquipGear(this PlayableCharacter player, IEquipable gear)
         {

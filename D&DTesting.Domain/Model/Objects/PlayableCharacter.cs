@@ -15,7 +15,7 @@ namespace D_DTesting.Domain.Model.Objects
             SpellInventory = new List<ISpell>();
             Skills = new List<ISkill>();
             Abilities = new List<IAbilitiyScore>();
-            SavingThrow = new List<ISavingThrow>();
+            SavingThrows = new List<ISavingThrow>();
         }
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -48,25 +48,7 @@ namespace D_DTesting.Domain.Model.Objects
         public List<ISpell> SpellInventory { get; set; }
         public List<ISkill> Skills { get; set; }
         public List<IAbilitiyScore> Abilities { get; set; }
-        public List<ISavingThrow> SavingThrow { get; set; }
+        public List<ISavingThrow> SavingThrows { get; set; }
         public int Initiative { get; set; }
-
-        public void EquipGear(IEquipable gear)
-        {
-            GearManager.EquipGear(this, gear);
-        }
-        public void UnEquipGear(IEquipable gear)
-        {
-            GearManager.UnEquipGear(this, gear);
-        }
-
-        public void StoreItem(IItem item)
-        {
-            GearManager.StoreItem(this, item);
-        }
-        public void RemoveItem(IItem item)
-        {
-            GearManager.RemoveItem(this, item);
-        }
     }
 }

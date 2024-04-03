@@ -2,7 +2,8 @@
 using D_DTesting.Domain.Abstractions;
 using D_DTesting.Domain.Enums;
 using D_DTesting.Domain.Extensions;
-using PC = D_DTesting.Domain.Model.Objects;
+using D_DTesting.Domain.Model.Inventory;
+using D_DTesting.Domain.Model.Objects;
 
 namespace D_DTesting.Application.PlayableCharacterApplication.Commands.CreatePlayableCharacter
 {
@@ -12,7 +13,7 @@ namespace D_DTesting.Application.PlayableCharacterApplication.Commands.CreatePla
         public Size Size { get; init; }
         public int MaxHealth { get; init; }
         public List<IAbilitiyScore> AbilitiyScores { get; init; }
-        public List<IItem> Inventories { get; init; }
+        public Bag Bag { get; init; }
     }
 
     public class CreatePlayableCharacterCommandHandler(IApplicationDbContext<Guid> context) : IRequestHandler<CreatePlayableCharacterCommand, Guid> { 
@@ -20,13 +21,13 @@ namespace D_DTesting.Application.PlayableCharacterApplication.Commands.CreatePla
 
         public async Task<Guid> Handle(CreatePlayableCharacterCommand request, CancellationToken cancellationToken)
         {
-            var entity = new PC.PlayableCharacter()
+            var entity = new PlayableCharacter()
             {
                 Name = request.Name,
                 Size = request.Size,
                 MaxHealth = request.MaxHealth,
                 Abilities = request.AbilitiyScores,
-                Inventories = request.Inventories
+                Bag = request.Bag
             };
 
             entity.SetSkills();
