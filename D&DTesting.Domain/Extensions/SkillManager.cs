@@ -89,7 +89,7 @@ namespace D_DTesting.Domain.Extensions
 
         private static bool ItemHasSameProperties(this IEquipable item, IEquipable otherItem)
         {
-            return item.Properties.All(p => 
+            return item == otherItem || item.Properties.All(p => 
             otherItem.Properties.Any(op => op.Name == p.Name 
             && op.Advantage == p.Advantage 
             && op.Disadvantage == p.Disadvantage));

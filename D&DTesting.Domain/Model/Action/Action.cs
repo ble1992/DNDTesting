@@ -13,9 +13,10 @@ namespace D_DTesting.Domain.Model.Action
         public int MinRange { get; set; }
         public int MaxRange { get; set; }
         public DamageType DamageType { get; set; }
-        public void Use(IInteractableObject target)
+        public void Use(IInteractableObject target, bool criticalRoll)
         {
-            target.CurrentHealth -= DamageDice.Roll();
+            if (criticalRoll) target.CurrentHealth += DamageDice.RollCritical();
+            else target.CurrentHealth += DamageDice.Roll();
         }
     }
 }

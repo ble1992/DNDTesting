@@ -13,15 +13,17 @@ namespace D_DTesting.Domain.Model.Action
         public int MaxRange { get; set; }
         public DamageType DamageType { get; set; }
         public SpellLevel SpellLevel { get; set; }
-        public void Use(IInteractableObject target)
+        public void Use(IInteractableObject target, bool criticalRoll)
         {
             if(DamageType == DamageType.Healing)
             {
-                target.CurrentHealth += DamageDice.Roll();
+                if(criticalRoll) target.CurrentHealth += DamageDice.RollCritical();
+                else target.CurrentHealth += DamageDice.Roll();
             }
             else
             {
-                target.CurrentHealth -= DamageDice.Roll();
+                if (criticalRoll) target.CurrentHealth += DamageDice.RollCritical();
+                else target.CurrentHealth += DamageDice.Roll();
             }
         }
     }

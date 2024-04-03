@@ -16,7 +16,7 @@ namespace D_DTesting.Domain.Model.Inventory
         public DamageType DamageType { get; set; }
 
         public List<Property> Properties { get; set; } = new List<Property>();
-        public void Use(IInteractableObject target)
+        public void Use(IInteractableObject target, bool criticalRoll)
         {
             throw new NotImplementedException();
         }

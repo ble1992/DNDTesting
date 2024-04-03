@@ -12,6 +12,6 @@ namespace D_DTesting.Domain.Abstractions
         public int Modifier { get; set; }
         public DamageType DamageType { get; set; }
         public SpellLevel SpellLevel { get; set; }
-        public void Use(IInteractableObject target);
+        public void Use(IInteractableObject target, bool criticalRoll);
     }
 }

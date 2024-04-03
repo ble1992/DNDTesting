@@ -9,6 +9,12 @@ namespace D_DTesting.Domain.Model.Objects
     {
         public PlayableCharacter()
         {
+            InitializeCollections();
+            InitializeDefaultValues();
+        }
+
+        private void InitializeCollections()
+        {
             ActionSets = new List<IAction>();
             Equipments = new List<IEquipable>();
             Spells = new List<ISpell>();
@@ -17,9 +23,16 @@ namespace D_DTesting.Domain.Model.Objects
             Abilities = new List<IAbilitiyScore>();
             SavingThrows = new List<ISavingThrow>();
         }
+
+        private void InitializeDefaultValues()
+        {
+            Level = 1;
+            Status = Status.Healthy;
+        }
+
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public int Level { get; set; } = 1;
+        public int Level { get; set; }
         public int CurrentHealth { get; set; }
         public int MaxHealth { get; set; }
         public int Armor { 
@@ -40,7 +53,7 @@ namespace D_DTesting.Domain.Model.Objects
             }
         }
         public Size Size { get; set; }
-        public Status Status { get; set; } = Status.Healthy;
+        public Status Status { get; set; }
         public int CurrentWeight { 
             get{ 
                 return Bag.CurrentWeight + Equipments.Sum(x => x.Weight);

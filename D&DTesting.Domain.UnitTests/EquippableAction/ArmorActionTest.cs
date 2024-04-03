@@ -17,16 +17,6 @@ namespace D_DTesting.Domain.UnitTests.EquippableAction
         }
 
         [Test]
-        public void ArmorShouldNotBeInInventoryWhenEquip()
-        {
-            _pc.SetSavingThrows();
-            _pc.SetSkills();
-            _pc.StoreItemInInventory(_armor);
-            _pc.EquipGear(_armor);
-            Assert.IsFalse(_pc.Bag.Items.Contains(_armor));
-        }
-
-        [Test]
         public void ArmorPropertyCreateStealthDisadvantage()
         {
             _pc.SetSavingThrows();

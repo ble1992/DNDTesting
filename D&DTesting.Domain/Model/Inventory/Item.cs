@@ -14,7 +14,7 @@ namespace D_DTesting.Domain.Model.Inventory
         public int MaxRange { get; set; }
         public int Modifier { get; set; }
         public DamageType DamageType { get; set; }
-        public void Use(IInteractableObject target)
+        public void Use(IInteractableObject target, bool criticalRoll)
         {
             if(DamageType == DamageType.Healing)
             {

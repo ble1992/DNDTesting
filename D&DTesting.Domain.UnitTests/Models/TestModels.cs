@@ -41,49 +41,37 @@ namespace D_DTesting.Domain.UnitTests.Models
                 {
                     Name = "Dexterity",
                     Score = 10,
-                    ItemScore = 0,
-                    Advantage = false,
-                    Disadvantage = false
+                    ItemScore = 0
                 },
                 new AbilityScores()
                 {
                     Name = "Strength",
                     Score = 10,
-                    ItemScore = 0,
-                    Advantage = false,
-                    Disadvantage = false
+                    ItemScore = 0
                 },
                 new AbilityScores()
                 {
                     Name = "Constitution",
                     Score = 10,
-                    ItemScore = 0,
-                    Advantage = false,
-                    Disadvantage = false
+                    ItemScore = 0
                 },
                 new AbilityScores()
                 {
                     Name = "Intelligence",
                     Score = 10,
-                    ItemScore = 0,
-                    Advantage = false,
-                    Disadvantage = false
+                    ItemScore = 0
                 },
                 new AbilityScores()
                 {
                     Name = "Wisdom",
                     Score = 10,
-                    ItemScore = 0,
-                    Advantage = false,
-                    Disadvantage = false
+                    ItemScore = 0
                 },
                 new AbilityScores()
                 {
                     Name = "Charisma",
                     Score = 10,
-                    ItemScore = 0,
-                    Advantage = false,
-                    Disadvantage = false
+                    ItemScore = 0
                 }
             }
         };

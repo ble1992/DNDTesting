@@ -29,12 +29,6 @@ namespace D_DTesting.Domain.Extensions
                 var skill = pc.Abilities.FirstOrDefault(s => s.Name == skillProperty.Name);
 
                 skill.ItemScore += skillProperty.Modifier;
-
-                if (skillProperty.Advantage)
-                    skill.Advantage = skillProperty.Advantage;
-
-                if (skillProperty.Disadvantage)
-                    skill.Disadvantage = skillProperty.Disadvantage;
             }
         }
 
