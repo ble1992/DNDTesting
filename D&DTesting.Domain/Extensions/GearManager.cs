@@ -30,13 +30,13 @@ namespace D_DTesting.Domain.Extensions
         }
         public static void StoreItem(this PlayableCharacter player, IItem item)
         {
-            player.Inventories.Add(item);
-            player.Weight += item.Weight;
+            player.Bag.Items.Add(item);
+            player.Bag.CurrentWeight += item.Weight;
         }
         public static void RemoveItem(this PlayableCharacter player, IItem item)
         {
-            player.Inventories.Remove(item);
-            player.Weight -= item.Weight;
+            player.Bag.Items.Remove(item);
+            player.Bag.CurrentWeight -= item.Weight;
         }
 
         private static void EquipArmor(PlayableCharacter player, Armor armor)
@@ -45,6 +45,7 @@ namespace D_DTesting.Domain.Extensions
             if (existingArmor != null)
             {
                 player.Armor -= ((Armor)existingArmor).ArmorValue;
+                player.StoreItem((IItem)existingArmor);
                 player.Equipments.Remove(existingArmor);
             }
             player.Equipments.Add(armor);

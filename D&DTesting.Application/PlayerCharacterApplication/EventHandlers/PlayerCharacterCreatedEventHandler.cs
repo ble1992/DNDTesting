@@ -1,7 +1,7 @@
 ﻿using D_DTesting.Domain.Events;
 using Microsoft.Extensions.Logging;
 
-namespace D_DTesting.Application.PlayableCharacter.EventHandlers
+namespace D_DTesting.Application.PlayableCharacterApplication.EventHandlers
 {
     internal class PlayerCharacterCreatedEventHandler(ILogger<PlayerCharacterCreatedEventHandler> logger) 
         : INotificationHandler<PlayerCharacterCreatedEvent>

@@ -4,7 +4,7 @@ using D_DTesting.Domain.Enums;
 using D_DTesting.Domain.Extensions;
 using PC = D_DTesting.Domain.Model.Objects;
 
-namespace D_DTesting.Application.PlayableCharacter.Commands.CreatePlayableCharacter
+namespace D_DTesting.Application.PlayableCharacterApplication.Commands.CreatePlayableCharacter
 {
     public record CreatePlayableCharacterCommand : IRequest<Guid>
     {

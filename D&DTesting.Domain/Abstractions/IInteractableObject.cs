@@ -8,7 +8,7 @@ namespace D_DTesting.Domain.Abstractions
         public int CurrentHealth { get; set; }
         public Size Size { get; set; }
         public Status Status { get; set; }
-        public int Weight { get; set; }
+        public int CurrentWeight { get; }
         public int Armor { get; set; }
     }
 }

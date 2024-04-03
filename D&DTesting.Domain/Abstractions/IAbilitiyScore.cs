@@ -6,7 +6,7 @@ namespace D_DTesting.Domain.Abstractions
     {
         public string Name { get; set; }
         public int Score { get; set; }
-        public int Modifier { get; set; }
+        public int Modifier { get; }
         public Dice Dice { get; set; }
         public bool Advantage { get; set; }
         public bool Disadvantage { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace D_DTesting.Application.PlayableCharacter.Commands.CreatePlayableCharacter
+﻿namespace D_DTesting.Application.PlayableCharacterApplication.Commands.CreatePlayableCharacter
 {
     public class CreatePlayableCharacterValidator : AbstractValidator<CreatePlayableCharacterCommand>
     {

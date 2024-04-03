@@ -11,7 +11,7 @@ namespace D_DTesting.Domain.Model.Misc
         public bool Disadvantage { get; set; } = false;
         public int Roll()
         {
-            if (Advantage) return Dice.RollAdvantage();
+            if (Advantage && !Disadvantage) return Dice.RollAdvantage();
             else if (Disadvantage && !Advantage) return Dice.RollDisadvantage();
             return Dice.Roll();
         }

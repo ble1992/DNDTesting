@@ -1,6 +1,7 @@
 ﻿using D_DTesting.Domain.Abstractions;
 using D_DTesting.Domain.Enums;
 using D_DTesting.Domain.Extensions;
+using D_DTesting.Domain.Model.Inventory;
 
 namespace D_DTesting.Domain.Model.Objects
 {
@@ -9,7 +10,6 @@ namespace D_DTesting.Domain.Model.Objects
         public PlayableCharacter()
         {
             ActionSets = new List<IAction>();
-            Inventories = new List<IItem>();
             Equipments = new List<IEquipable>();
             Spells = new List<ISpell>();
             SpellInventory = new List<ISpell>();
@@ -19,15 +19,30 @@ namespace D_DTesting.Domain.Model.Objects
         }
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public int Level { get; set; } = 1;
         public int CurrentHealth { get; set; }
         public int MaxHealth { get; set; }
         public int Armor { get; set; }
+        public int ProficiencyBonus {
+            get
+            {
+                return ProficiencyBonus;
+            }
+            set 
+            {
+                this.SetProficiencyBonus(Level);
+            }
+        }
         public Size Size { get; set; }
         public Status Status { get; set; } = Status.Healthy;
-        public int Weight { get; set; }
+        public int CurrentWeight { 
+            get{ 
+                return Bag.CurrentWeight + Equipments.Sum(x => x.Weight);
+            } 
+        }
 
         public List<IAction> ActionSets { get; set; }
-        public List<IItem> Inventories { get; set; }
+        public Bag Bag { get; set; }
         public List<IEquipable> Equipments { get; set; }
         public List<ISpell> Spells { get; set; }
         public List<ISpell> SpellInventory { get; set; }

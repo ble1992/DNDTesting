@@ -42,7 +42,7 @@ namespace D_DTesting.Domain.Extensions
             }
         }
 
-        private static int CalculateModifier(int score)
+        public static int CalculateModifier(int score)
         {
             return (score - 10) / 2;
         }
